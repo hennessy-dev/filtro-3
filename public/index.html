@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../node_modules/mdb-ui-kit/css/mdb.min.css" />
+    <link
+      rel="stylesheet"
+      href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../css/style.css">
+    <title >Campus City Manager</title>
+  </head>
+  <body data-bs-theme="light">
+    <div class=" mx-5 pt-5 pb-5 rounded-7" >
+      <div class="container-sm p-3 d-flex flex-column justify-content-center ">
+        <h1 class="fs-1 fw-bold text-success text-center text-uppercase">
+          <span class="bg-light p-3 rounded-4">Gestor de ciudades</span>
+        </h1><br>
+        <button class="btn btn-outline-dark" id="temaClaro">
+          tema oscuro
+        </button><br>
+        <button class="btn btn-outline-light" id="temaOscuro">
+          tema claro
+        </button>
+      </div>
+      <div class="m-5 p-5 border border-3 border-light rounded-7" style="backdrop-filter: blur(5px);">
+        <h2 class="fs-2 fw-bold text-success text-center text-uppercase">
+          <span class="bg-light p-3 rounded-4" >Departamentos</span>
+        </h2>
+        <div class="container mt-5">
+          <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-8">
+              <div class="bg-light p-4 rounded rounded-4">
+                <h4
+                  class="fs-4 fw-bold text-warning text-uppercase text-center mb-3 mt-3"
+                >
+                  <span class="bg-light border border-warning rounded-4 p-3">Agregar departamento</span>
+                </h4>
+                <form id="form">
+                  <div class="mb-3">
+                    <label class="form-label fw-bolder"
+                      >Nombre del departamento</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="nomDepartamento"
+                      name="nomDepartamento"
+                      required
+                    />
+                  </div>
+                  <input
+                    type="submit"
+                    class="btn btn-success"
+                    data-accion="Registrar"
+                    value="Registrar"
+                  />
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container mt-5">
+          <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-8">
+              <div class="bg-light table-responsive p-4 rounded rounded-4">
+                <h4
+                  class="fs-4 fw-bold text-warning text-uppercase text-center mt-3"
+                >
+                  <span class="bg-light border border-warning p-3 rounded-4">Listado de departamentos</span>
+                </h4>
+                <table class="table table-dark mt-5">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Departamento</th>
+                      <th>Opciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbodyDepartamentos"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="modal fade"
+          id="modalModificar"
+          tabindex="-1"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title text-primary">Modificar Departamento</h4>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                  data-backdrop="false"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form id="formActualizar">
+                  <div class="mb-3">
+                    <label class="form-label text-secondary"
+                      >Nombre del departamento</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="departamento"
+                      name="departamento"
+                      required
+                    />
+                  </div>
+                  <input
+                    type="submit"
+                    class="btn btn-success"
+                    data-accion="Actualizar"
+                    value="Actualizar"
+                  />
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="seccion m-5 p-5 border border-3 border-light rounded-7">
+        <h2 class="fs-2 fw-bold text-success text-center text-uppercase">
+          <span class="bg-light  p-3 rounded-4" >Ciudades</span>
+        </h2>
+        <div class="container mt-5">
+          <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-8">
+              <div class="bg-light p-4 rounded rounded-4">
+                <h4
+                  class="fs-4 fw-bold text-warning text-uppercase text-center mb-3 mt-3"
+                >
+                  <span class="p-3 border border-warning rounded-4">Agregar ciudad</span>
+                </h4>
+                <form id="formCiudades">
+                  <div class="mb-3">
+                    <label class="form-label text-dark"
+                      >Nombre de la Ciudad</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="ciudad"
+                      name="ciudad"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label fw-bolder"
+                      >Seleccionar departamento</label
+                    >
+                    <select
+                      class="form-select"
+                      id="departamentoId"
+                      name="departamentoId"
+                      required
+                    >
+                      <option value="" disabled selected>Departamento</option>
+                    </select>
+                  </div>
+                  <input
+                    type="submit"
+                    class="btn btn-success"
+                    data-accion="RegistrarCiudad"
+                    value="Registrar"
+                  />
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container mt-5">
+          <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-8">
+              <div class="bg-light table-responsive p-4 rounded rounded-4">
+                <h4
+                  class="fs-4 fw-bold text-warning text-uppercase text-center pt-3"
+                >
+                  <span class="p-3 border border-warning rounded-4">Listado de ciudades</span>
+                </h4>
+                <table class="table table-dark mt-5">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Ciudad</th>
+                      <th>Departamento</th>
+                      <th>Opciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbodyCiudades"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-center pt-5">
+            <div id="climaContainer" class="">
+
+              <div class="card" style="width: 18rem;">
+                <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/062.webp" class="card-img-top" alt="Chicago Skyscrapers"/>
+                <div class="card-body">
+                  <h5 class="card-title">Ciudad: </h5>
+                </div>
+                <ul class="list-group list-group-light list-group-small">
+                  <li class="list-group-item px-4">Temperatura F°: </li>
+                  <li class="list-group-item px-4"></li>
+                  <li class="list-group-item px-4"></li>
+                </ul>
+                <div class="card-body">
+                  
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="modal fade"
+          id="modalModificarCiudad"
+          tabindex="-1"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title text-primary">Modificar Ciudad</h4>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form id="formActualizarCiudad">
+                  <div class="mb-3">
+                    <label class="form-label text-secondary"
+                      >Nombre del ciudad</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="ciudad"
+                      name="ciudad"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label text-secondary"
+                      >Seleccionar departamento</label
+                    >
+                    <select
+                      class="form-select"
+                      id="departamentoIdCiudad"
+                      name="departamentoId"
+                      required
+                    >
+                      <option value="" disabled selected>Departamento</option>
+                    </select>
+                  </div>
+                  <input
+                    type="submit"
+                    class="btn btn-success"
+                    data-accion="ActualizarCiudad"
+                    value="Actualizar"
+                  />
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../src/index.js" type="module" defer></script>
+    <script src="../node_modules/mdb-ui-kit/js/mdb.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+seccion{
+    background-color: red;
+}
+
+body{
+    background-image: url('https://services.meteored.com/img/article/-por-que-las-nubes-no-se-caen--7332-1_1280.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    backdrop-filter: blur(10px);
+}
